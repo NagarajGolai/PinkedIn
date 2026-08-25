@@ -30,54 +30,17 @@ pipeline {
                     echo STOPPING EXISTING SERVICES
                     echo ========================================
 
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8761" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8761 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8761" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8091" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8092" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8093" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8094" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8095" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8000" ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
 
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8091" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8091 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
+                    powershell -NoProfile -Command "Start-Sleep -Seconds 3"
 
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8092" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8092 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
-
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8093" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8093 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
-
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8094" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8094 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
-
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8095" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8095 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
-
-                    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8000" ^| findstr "LISTENING"') do (
-                        echo Killing process on port 8000 - PID %%a
-                        taskkill /F /PID %%a >nul 2>&1
-                    )
-
-                    echo Waiting for processes to stop...
-
-                    powershell -NoProfile -Command "Start-Sleep -Seconds 5"
-
-                    echo ========================================
-                    echo CHECKING PORTS
-                    echo ========================================
-
-                    netstat -ano | findstr "LISTENING" | findstr ":8761 :8091 :8092 :8093 :8094 :8095 :8000"
-
-                    echo ========================================
-                    echo OLD SERVICES STOPPED
-                    echo ========================================
+                    echo Existing services stopped.
                 '''
             }
         }
@@ -93,14 +56,12 @@ pipeline {
                         for /d %%i in (*) do (
                             if exist "%%i\\pom.xml" (
                                 echo.
-                                echo ========================================
                                 echo Building %%i
-                                echo ========================================
+                                echo ----------------------------------------
 
                                 call mvn -f "%%i\\pom.xml" clean package -DskipTests
 
                                 if errorlevel 1 (
-                                    echo.
                                     echo BUILD FAILED: %%i
                                     exit /b 1
                                 )
@@ -127,14 +88,12 @@ pipeline {
                         for /d %%i in (*) do (
                             if exist "%%i\\pom.xml" (
                                 echo.
-                                echo ========================================
                                 echo Testing %%i
-                                echo ========================================
+                                echo ----------------------------------------
 
                                 call mvn -f "%%i\\pom.xml" test
 
                                 if errorlevel 1 (
-                                    echo.
                                     echo TEST FAILED: %%i
                                     exit /b 1
                                 )
@@ -157,41 +116,30 @@ pipeline {
                     echo STARTING EUREKA
                     echo ========================================
 
-                    start "Eureka" /B cmd /c "java -jar backend\\eureka\\target\\eureka-0.0.1-SNAPSHOT.jar > eureka.log 2>&1"
+                    if not exist "backend\\eureka\\target\\eureka-0.0.1-SNAPSHOT.jar" (
+                        echo Eureka JAR NOT FOUND
+                        exit /b 1
+                    )
 
-                    echo Waiting for Eureka...
+                    start "Eureka" /MIN cmd /c "java -jar backend\\eureka\\target\\eureka-0.0.1-SNAPSHOT.jar > eureka.log 2>&1"
+
+                    echo Eureka process started.
+                    echo Waiting for Eureka to start...
 
                     powershell -NoProfile -Command ^
-                    "$timeout = 60; ^
-                     $elapsed = 0; ^
-                     while ($elapsed -lt $timeout) { ^
-                         try { ^
-                             $client = New-Object System.Net.Sockets.TcpClient; ^
-                             $client.Connect('127.0.0.1',8761); ^
-                             $client.Close(); ^
-                             Write-Host 'Eureka is UP'; ^
-                             exit 0 ^
-                         } catch { ^
-                             Start-Sleep -Seconds 2; ^
-                             $elapsed += 2 ^
-                         } ^
-                     }; ^
-                     Write-Host 'Eureka FAILED TO START'; ^
-                     exit 1"
+                    "$timeout=60; $elapsed=0; while($elapsed -lt $timeout) { if(Test-NetConnection 127.0.0.1 -Port 8761 -InformationLevel Quiet) { Write-Host 'EUREKA IS UP'; exit 0 }; Start-Sleep -Seconds 2; $elapsed+=2 }; Write-Host 'EUREKA FAILED TO START'; exit 1"
 
                     if errorlevel 1 (
+                        echo.
                         echo ========================================
                         echo EUREKA FAILED
                         echo ========================================
                         echo.
-                        echo Eureka log:
-                        type eureka.log
+                        if exist eureka.log type eureka.log
                         exit /b 1
                     )
 
-                    echo ========================================
-                    echo EUREKA STARTED SUCCESSFULLY
-                    echo ========================================
+                    echo Eureka is running on port 8761.
                 '''
             }
         }
@@ -203,44 +151,46 @@ pipeline {
                     echo STARTING USER SERVICE
                     echo ========================================
 
-                    start "User Service" /B cmd /c "java -jar backend\\user-service\\target\\user-service-0.0.1-SNAPSHOT.jar > user-service.log 2>&1"
+                    start "User Service" /MIN cmd /c "java -jar backend\\user-service\\target\\user-service-0.0.1-SNAPSHOT.jar > user-service.log 2>&1"
 
                     echo ========================================
                     echo STARTING COMPANY SERVICE
                     echo ========================================
 
-                    start "Company Service" /B cmd /c "java -jar backend\\company-service\\target\\company-service-0.0.1-SNAPSHOT.jar > company-service.log 2>&1"
+                    start "Company Service" /MIN cmd /c "java -jar backend\\company-service\\target\\company-service-0.0.1-SNAPSHOT.jar > company-service.log 2>&1"
 
                     echo ========================================
                     echo STARTING POST SERVICE
                     echo ========================================
 
-                    start "Post Service" /B cmd /c "java -jar backend\\post-service\\target\\post-service-0.0.1-SNAPSHOT.jar > post-service.log 2>&1"
+                    start "Post Service" /MIN cmd /c "java -jar backend\\post-service\\target\\post-service-0.0.1-SNAPSHOT.jar > post-service.log 2>&1"
 
                     echo ========================================
                     echo STARTING JOB SERVICE
                     echo ========================================
 
-                    start "Job Service" /B cmd /c "java -jar backend\\job-service\\target\\job-service-0.0.1-SNAPSHOT.jar > job-service.log 2>&1"
+                    start "Job Service" /MIN cmd /c "java -jar backend\\job-service\\target\\job-service-0.0.1-SNAPSHOT.jar > job-service.log 2>&1"
 
                     echo ========================================
                     echo STARTING APPLICATION SERVICE
                     echo ========================================
 
-                    start "Application Service" /B cmd /c "java -jar backend\\application-service\\target\\application-service-0.0.1-SNAPSHOT.jar > application-service.log 2>&1"
+                    start "Application Service" /MIN cmd /c "java -jar backend\\application-service\\target\\application-service-0.0.1-SNAPSHOT.jar > application-service.log 2>&1"
 
                     echo ========================================
                     echo STARTING API GATEWAY
                     echo ========================================
 
-                    start "API Gateway" /B cmd /c "java -jar backend\\api-gateway\\target\\api-gateway-0.0.1-SNAPSHOT.jar > api-gateway.log 2>&1"
+                    start "API Gateway" /MIN cmd /c "java -jar backend\\api-gateway\\target\\api-gateway-0.0.1-SNAPSHOT.jar > api-gateway.log 2>&1"
 
-                    echo Waiting for services to start...
-
-                    powershell -NoProfile -Command "Start-Sleep -Seconds 20"
+                    echo.
+                    echo All service processes started.
+                    echo Waiting 30 seconds for Spring Boot applications...
+                    
+                    powershell -NoProfile -Command "Start-Sleep -Seconds 30"
 
                     echo ========================================
-                    echo SERVICES STARTED
+                    echo SERVICE START COMMANDS COMPLETED
                     echo ========================================
                 '''
             }
@@ -254,10 +204,32 @@ pipeline {
                     echo ========================================
 
                     echo.
-                    echo Active listening ports:
-                    echo.
+                    echo EUREKA - PORT 8761
+                    netstat -ano | findstr ":8761" | findstr "LISTENING"
 
-                    netstat -ano | findstr "LISTENING" | findstr ":8761 :8091 :8092 :8093 :8094 :8095 :8000"
+                    echo.
+                    echo USER SERVICE - PORT 8091
+                    netstat -ano | findstr ":8091" | findstr "LISTENING"
+
+                    echo.
+                    echo COMPANY SERVICE - PORT 8092
+                    netstat -ano | findstr ":8092" | findstr "LISTENING"
+
+                    echo.
+                    echo POST SERVICE - PORT 8093
+                    netstat -ano | findstr ":8093" | findstr "LISTENING"
+
+                    echo.
+                    echo JOB SERVICE - PORT 8094
+                    netstat -ano | findstr ":8094" | findstr "LISTENING"
+
+                    echo.
+                    echo APPLICATION SERVICE - PORT 8095
+                    netstat -ano | findstr ":8095" | findstr "LISTENING"
+
+                    echo.
+                    echo API GATEWAY - PORT 8000
+                    netstat -ano | findstr ":8000" | findstr "LISTENING"
 
                     echo.
                     echo ========================================
@@ -283,7 +255,8 @@ pipeline {
             echo 'BUILD OR DEPLOYMENT FAILED'
             echo '========================================'
             echo ''
-            echo 'Check the Jenkins console output and service log files.'
+            echo 'Check Jenkins Console Output.'
+            echo 'Check eureka.log and service log files.'
         }
     }
 }
