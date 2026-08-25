@@ -75,7 +75,7 @@ pipeline {
 
                     start "Eureka" /B java -jar "backend\\eureka\\target\\eureka-0.0.1-SNAPSHOT.jar"
 
-                    timeout /t 10 /nobreak
+                    powershell -NoProfile -Command "Start-Sleep -Seconds 10"
 
                     echo ========================================
                     echo Starting User Service
