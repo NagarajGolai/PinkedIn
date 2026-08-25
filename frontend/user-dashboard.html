@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard — PinkedIn</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="dash" id="dash">
+      <div class="sidebar-backdrop"></div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <a href="index.html" class="nav-brand">
+            <span class="logo-mark">P</span>
+            <span>Pink<span style="color: #fff">edIn</span></span>
+          </a>
+          <button
+            class="icon-btn"
+            data-collapse
+            style="color: #94a3b8; margin-left: auto"
+            aria-label="Collapse sidebar"
+            title="Collapse"
+          >
+            ⇆
+          </button>
+        </div>
+        <nav class="sidebar-nav" aria-label="Dashboard">
+          <div class="side-group-label">Main</div>
+          <div class="side-item active" data-section="dashboard">
+            <span class="side-ico">🏠</span
+            ><span class="side-text">Dashboard</span>
+          </div>
+          <div class="side-item" data-section="profile">
+            <span class="side-ico">👤</span
+            ><span class="side-text">Profile</span>
+          </div>
+          <div class="side-item" data-section="feed">
+            <span class="side-ico">📰</span><span class="side-text">Feed</span>
+          </div>
+          <div class="side-item" data-section="jobs">
+            <span class="side-ico">💼</span><span class="side-text">Jobs</span
+            ><span class="side-badge">12</span>
+          </div>
+          <div class="side-item" data-section="companies">
+            <span class="side-ico">🏢</span
+            ><span class="side-text">Companies</span>
+          </div>
+          <div class="side-item" data-section="applications">
+            <span class="side-ico">📋</span
+            ><span class="side-text">Applications</span>
+          </div>
+          <div class="side-group-label">Connect</div>
+          <div class="side-item" data-section="messages">
+            <span class="side-ico">💬</span
+            ><span class="side-text">Messages</span
+            ><span class="side-badge">3</span>
+          </div>
+          <div class="side-item" data-section="notifications">
+            <span class="side-ico">🔔</span
+            ><span class="side-text">Notifications</span
+            ><span class="side-badge">3</span>
+          </div>
+          <div class="side-group-label">Account</div>
+          <div class="side-item" data-section="settings">
+            <span class="side-ico">⚙️</span
+            ><span class="side-text">Settings</span>
+          </div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="side-user">
+            <span class="avatar avatar-sm">AJ</span>
+            <div class="su-info">
+              <div class="su-name">Alex Johnson</div>
+              <div class="su-role">Job Seeker</div>
+            </div>
+          </div>
+          <button
+            class="side-logout"
+            data-logout
+          >
+            <span class="side-ico">⏻</span><span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN ===== -->
+      <div>
+        <!-- TOP NAV -->
+        <header class="topnav">
+          <button class="topnav-burger" data-burger aria-label="Open menu">
+            ☰
+          </button>
+          <div class="topnav-search">
+            <span class="search-ico">🔍</span>
+            <input
+              class="input"
+              type="search"
+              placeholder="Search jobs, companies, people…"
+              aria-label="Search"
+            />
+          </div>
+          <div class="topnav-actions">
+            <span class="topnav-date" data-live-date>—</span>
+            <button
+              class="topnav-theme"
+              data-theme-toggle
+              aria-label="Toggle theme"
+            >
+              🌙
+            </button>
+            <button
+              class="icon-btn"
+              data-dropdown="#messagesDropdown"
+              aria-label="Messages"
+            >
+              ✉️<span class="dot-badge">3</span>
+            </button>
+            <div class="dropdown" id="messagesDropdown">
+              <div class="dropdown-head">
+                <h4>Messages</h4>
+                <span class="head-action">View all</span>
+              </div>
+              <div class="dropdown-body">
+                <div class="dropdown-item unread">
+                  <div class="avatar avatar-sm" style="background: #0a66c2">
+                    AM
+                  </div>
+                  <div>
+                    <div class="di-text">
+                      Aarav Mehta: Let's schedule the interview…
+                    </div>
+                    <div class="di-time">12m ago</div>
+                  </div>
+                </div>
+                <div class="dropdown-item unread">
+                  <div class="avatar avatar-sm" style="background: #4f46e5">
+                    SK
+                  </div>
+                  <div>
+                    <div class="di-text">
+                      Sara Klein: Thanks for the referral!
+                    </div>
+                    <div class="di-time">2h ago</div>
+                  </div>
+                </div>
+                <div class="dropdown-item">
+                  <div class="avatar avatar-sm" style="background: #16a34a">
+                    DP
+                  </div>
+                  <div>
+                    <div class="di-text">
+                      Daniel Park: Can you share your portfolio?
+                    </div>
+                    <div class="di-time">1d ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="icon-btn"
+              data-dropdown="#notificationsDropdown"
+              aria-label="Notifications"
+            >
+              🔔<span class="dot-badge">3</span>
+            </button>
+            <div class="dropdown" id="notificationsDropdown">
+              <div class="dropdown-head">
+                <h4>Notifications</h4>
+                <span class="head-action">Mark all read</span>
+              </div>
+              <div class="dropdown-body"></div>
+            </div>
+            <span class="avatar avatar-sm" style="cursor: pointer">AJ</span>
+          </div>
+        </header>
+
+        <main class="dash-main">
+          <!-- ===== DASHBOARD ===== -->
+          <section class="dash-section active" data-section="dashboard">
+            <!-- Hero banner -->
+            <div class="hero-banner reveal">
+              <div>
+                <h2>Welcome back, Alex 👋</h2>
+                <p>
+                  You have 3 new messages and 12 new jobs matching your profile.
+                </p>
+                <div class="hero-quick-stats">
+                  <div>
+                    <div class="hqs-num">3</div>
+                    <div class="hqs-label">New messages</div>
+                  </div>
+                  <div>
+                    <div class="hqs-num">12</div>
+                    <div class="hqs-label">Matching jobs</div>
+                  </div>
+                  <div>
+                    <div class="hqs-num">5</div>
+                    <div class="hqs-label">Active applications</div>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <button
+                  class="btn btn-light"
+                  onclick="
+                    document.querySelector('[data-section=jobs]').click()
+                  "
+                >
+                  🔍 Browse Jobs
+                </button>
+                <button
+                  class="btn btn-light"
+                  onclick="
+                    document.querySelector('[data-section=feed]').click()
+                  "
+                >
+                  ✏️ Create a Post
+                </button>
+                <button
+                  class="btn btn-light"
+                  onclick="
+                    document.querySelector('[data-section=profile]').click()
+                  "
+                >
+                  👤 View Profile
+                </button>
+              </div>
+              <span class="hero-illus-mini">📊</span>
+            </div>
+
+            <!-- KPI cards -->
+            <div class="kpi-grid">
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">🤝</div></div>
+                <div class="kpi-num" data-count="248">0</div>
+                <div class="kpi-label">Total Connections</div>
+                <div class="kpi-trend up">↑ 12 this week</div>
+                <span class="kpi-bg-ico">🤝</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">📋</div></div>
+                <div class="kpi-num" data-count="5">0</div>
+                <div class="kpi-label">Applications</div>
+                <div class="kpi-trend up">↑ 2 new</div>
+                <span class="kpi-bg-ico">📋</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">⭐</div></div>
+                <div class="kpi-num" data-count="18">0</div>
+                <div class="kpi-label">Saved Jobs</div>
+                <div class="kpi-trend up">↑ 4 added</div>
+                <span class="kpi-bg-ico">⭐</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">🏢</div></div>
+                <div class="kpi-num" data-count="32">0</div>
+                <div class="kpi-label">Companies Following</div>
+                <div class="kpi-trend up">↑ 3 new</div>
+                <span class="kpi-bg-ico">🏢</span>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="dash-body">
+              <div class="main-col">
+                <div class="card">
+                  <div class="card-head">
+                    <h3>Recent Feed</h3>
+                    <span
+                      class="head-action"
+                      onclick="
+                        document.querySelector('[data-section=feed]').click()
+                      "
+                      >See all →</span
+                    >
+                  </div>
+                  <div class="card-body" style="padding: 0">
+                    <div id="feedStream"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="side-col">
+                <div class="card">
+                  <div class="card-head"><h3>Applications</h3></div>
+                  <div class="card-body">
+                    <div
+                      style="display: flex; flex-direction: column; gap: 12px"
+                    >
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <span>Interview</span
+                        ><span class="badge badge-warning">1</span>
+                      </div>
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <span>Offer</span
+                        ><span class="badge badge-success">1</span>
+                      </div>
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <span>Shortlisted</span
+                        ><span class="badge badge-info">1</span>
+                      </div>
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <span>Applied</span
+                        ><span class="badge badge-muted">2</span>
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary btn-block btn-sm"
+                      style="margin-top: 16px"
+                      onclick="
+                        document
+                          .querySelector('[data-section=applications]')
+                          .click()
+                      "
+                    >
+                      View all
+                    </button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-head"><h3>Suggested Jobs</h3></div>
+                  <div class="card-body">
+                    <div
+                      style="display: flex; flex-direction: column; gap: 14px"
+                    >
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          Senior Frontend Engineer
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          Nimbus Cloud · Remote
+                        </div>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          Backend Developer
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          Quanta Systems · Hybrid
+                        </div>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          Product Designer
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          Lumen Labs · Bengaluru
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== PROFILE ===== -->
+          <section class="dash-section" data-section="profile">
+            <div class="page-head">
+              <div>
+                <h1>My Profile</h1>
+                <p>Your professional brand on PinkedIn.</p>
+              </div>
+              <div class="ph-actions">
+                <button class="btn btn-secondary" data-edit-profile>
+                  ✏️ Edit Profile</button
+                ><button class="btn btn-danger" data-delete-profile>
+                  🗑️ Delete
+                </button>
+              </div>
+            </div>
+            <div class="card" style="overflow: hidden">
+              <div class="profile-cover">
+                <button class="cover-edit">📷 Edit Cover</button>
+              </div>
+              <div class="profile-main">
+                <div class="profile-head">
+                  <div class="avatar avatar-xl">AJ</div>
+                  <div class="ph-info">
+                    <h2>Alex Johnson</h2>
+                    <p>Senior Software Engineer · Bengaluru, India</p>
+                  </div>
+                </div>
+                <p class="profile-bio">
+                  Passionate full-stack engineer with 6+ years building scalable
+                  web apps. Currently exploring senior roles at product-first
+                  companies. Open to remote.
+                </p>
+                <div class="profile-stats">
+                  <div>
+                    <div class="ps-num">248</div>
+                    <div class="ps-label">Connections</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">1.2k</div>
+                    <div class="ps-label">Profile views</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">32</div>
+                    <div class="ps-label">Following</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">18</div>
+                    <div class="ps-label">Endorsements</div>
+                  </div>
+                </div>
+
+                <div class="dash-body">
+                  <div class="main-col">
+                    <div class="card" style="margin-bottom: var(--space-6)">
+                      <div class="card-head">
+                        <h3>Experience</h3>
+                        <span class="head-action">+ Add</span>
+                      </div>
+                      <div class="card-body">
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <div class="ti-period">2023 — Present</div>
+                            <h4>Senior Software Engineer</h4>
+                            <div class="ti-org">Nimbus Cloud</div>
+                            <p>
+                              Lead frontend for the collaboration suite. Shipped
+                              real-time editing that improved user retention
+                              28%.
+                            </p>
+                          </div>
+                          <div class="timeline-item">
+                            <div class="ti-period">2020 — 2023</div>
+                            <h4>Software Engineer</h4>
+                            <div class="ti-org">Lumen Labs</div>
+                            <p>
+                              Built the design system used across 9 products.
+                              Mentored 4 junior engineers.
+                            </p>
+                          </div>
+                          <div class="timeline-item">
+                            <div class="ti-period">2018 — 2020</div>
+                            <h4>Junior Developer</h4>
+                            <div class="ti-org">AppVista</div>
+                            <p>
+                              Developed iOS features used by 200k+ users. Owned
+                              the onboarding flow rewrite.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-head">
+                        <h3>Education</h3>
+                        <span class="head-action">+ Add</span>
+                      </div>
+                      <div class="card-body">
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <div class="ti-period">2014 — 2018</div>
+                            <h4>B.Tech, Computer Science</h4>
+                            <div class="ti-org">
+                              Indian Institute of Technology
+                            </div>
+                            <p>
+                              Graduated with honors. President of the coding
+                              club.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="side-col">
+                    <div class="card" style="margin-bottom: var(--space-6)">
+                      <div class="card-head"><h3>Skills</h3></div>
+                      <div class="card-body">
+                        <div class="skill-tags">
+                          <span class="skill-tag">JavaScript</span
+                          ><span class="skill-tag">React</span
+                          ><span class="skill-tag">TypeScript</span
+                          ><span class="skill-tag">Node.js</span
+                          ><span class="skill-tag">Java</span
+                          ><span class="skill-tag">Spring Boot</span
+                          ><span class="skill-tag">PostgreSQL</span
+                          ><span class="skill-tag">AWS</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-head"><h3>Resume</h3></div>
+                      <div class="card-body">
+                        <div
+                          style="text-align: center; padding: var(--space-4) 0"
+                        >
+                          <div style="font-size: 3rem">📄</div>
+                          <p style="margin: 8px 0 16px">
+                            Alex_Johnson_Resume.pdf
+                          </p>
+                          <button class="btn btn-secondary btn-block btn-sm">
+                            ⬇️ Download</button
+                          ><button
+                            class="btn btn-ghost btn-block btn-sm"
+                            style="margin-top: 8px"
+                          >
+                            🔄 Replace
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== FEED ===== -->
+          <section class="dash-section" data-section="feed">
+            <div class="page-head">
+              <div>
+                <h1>Feed</h1>
+                <p>Updates from your network.</p>
+              </div>
+            </div>
+            <div class="dash-body">
+              <div class="main-col">
+                <div class="card" style="margin-bottom: var(--space-6)">
+                  <form id="createPostForm">
+                    <div class="create-post">
+                      <span class="avatar avatar-md">AJ</span>
+                      <input
+                        class="input"
+                        id="postInput"
+                        placeholder="Share an update with your network…"
+                        required
+                      />
+                    </div>
+                    <div
+                      class="post-actions-row"
+                      style="padding: 0 var(--space-6) var(--space-5)"
+                    >
+                      <button type="button" class="post-action">🖼️ Photo</button
+                      ><button type="button" class="post-action">
+                        🎬 Video</button
+                      ><button type="button" class="post-action">
+                        📅 Event</button
+                      ><button
+                        type="submit"
+                        class="btn btn-primary btn-sm"
+                        style="margin-left: auto"
+                      >
+                        Post
+                      </button>
+                    </div>
+                  </form>
+                  <div
+                    id="feedStreamFeed"
+                    style="padding: var(--space-5)"
+                  ></div>
+                </div>
+              </div>
+              <div class="side-col">
+                <div class="card">
+                  <div class="card-head"><h3>Trending</h3></div>
+                  <div class="card-body">
+                    <div
+                      style="display: flex; flex-direction: column; gap: 14px"
+                    >
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          #SpringBoot
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          12.4k posts
+                        </div>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          #RemoteWork
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          8.1k posts
+                        </div>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 0.9rem">
+                          #Frontend
+                        </div>
+                        <div
+                          style="font-size: 0.8rem; color: var(--text-muted)"
+                        >
+                          5.7k posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== JOBS ===== -->
+          <section class="dash-section" data-section="jobs">
+            <div class="page-head">
+              <div>
+                <h1>Jobs</h1>
+                <p>Find your next opportunity.</p>
+              </div>
+            </div>
+            <div
+              class="card"
+              style="margin-bottom: var(--space-6); padding: var(--space-5)"
+            >
+              <input
+                class="input"
+                id="jobSearch"
+                type="search"
+                placeholder="Search by title, company, or skill…"
+                style="margin-bottom: var(--space-4)"
+              />
+              <div class="filters">
+                <button class="chip active" data-job-filter="all">All</button>
+                <button class="chip" data-job-filter="react">React</button>
+                <button class="chip" data-job-filter="java">Java</button>
+                <button class="chip" data-job-filter="design">Design</button>
+                <button class="chip" data-job-filter="devops">DevOps</button>
+                <button class="chip" data-job-filter="data">Data</button>
+                <select
+                  class="select"
+                  id="jobType"
+                  style="width: auto; margin-left: auto"
+                >
+                  <option value="">All types</option>
+                  <option>Full-time</option>
+                  <option>Hybrid</option>
+                  <option>Contract</option>
+                </select>
+              </div>
+            </div>
+            <div class="job-grid" id="jobGrid"></div>
+          </section>
+
+          <!-- ===== COMPANIES ===== -->
+          <section class="dash-section" data-section="companies">
+            <div class="page-head">
+              <div>
+                <h1>Companies</h1>
+                <p>Discover and follow companies hiring now.</p>
+              </div>
+            </div>
+            <div class="company-grid" id="companyGrid"></div>
+          </section>
+
+          <!-- ===== APPLICATIONS ===== -->
+          <section class="dash-section" data-section="applications">
+            <div class="page-head">
+              <div>
+                <h1>My Applications</h1>
+                <p>Track the status of every application.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Role</th>
+                      <th>Company</th>
+                      <th>Applied</th>
+                      <th>Status</th>
+                      <th>Progress</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="applicationsBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== MESSAGES ===== -->
+          <section class="dash-section" data-section="messages">
+            <div class="page-head">
+              <div>
+                <h1>Messages</h1>
+                <p>Chat with recruiters and connections.</p>
+              </div>
+            </div>
+            <div class="msg-layout">
+              <div class="msg-sidebar">
+                <div class="msg-search">
+                  <input class="input" placeholder="Search conversations…" />
+                </div>
+                <div class="conv-list" id="convList"></div>
+              </div>
+              <div class="msg-panel">
+                <div class="msg-head" id="msgHead"></div>
+                <div class="msg-stream" id="msgStream"></div>
+                <div class="msg-input">
+                  <button class="icon-btn">📎</button
+                  ><input
+                    class="input"
+                    id="msgInput"
+                    placeholder="Type a message…"
+                  /><button class="btn btn-primary btn-sm" id="msgSend">
+                    Send
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== NOTIFICATIONS ===== -->
+          <section class="dash-section" data-section="notifications">
+            <div class="page-head">
+              <div>
+                <h1>Notifications</h1>
+                <p>Stay up to date with your activity.</p>
+              </div>
+              <button class="btn btn-secondary btn-sm">Mark all as read</button>
+            </div>
+            <div class="card">
+              <div
+                class="card-body"
+                id="notifPage"
+                style="display: flex; flex-direction: column; gap: 8px"
+              ></div>
+            </div>
+          </section>
+
+          <!-- ===== SETTINGS ===== -->
+          <section class="dash-section" data-section="settings">
+            <div class="page-head">
+              <div>
+                <h1>Settings</h1>
+                <p>Manage your preferences.</p>
+              </div>
+            </div>
+            <div class="settings-layout">
+              <div class="settings-tabs">
+                <div class="settings-tab active" data-settings-tab="theme">
+                  🎨 Theme
+                </div>
+                <div class="settings-tab" data-settings-tab="notif">
+                  🔔 Notifications
+                </div>
+                <div class="settings-tab" data-settings-tab="privacy">
+                  🔒 Privacy
+                </div>
+                <div class="settings-tab" data-settings-tab="profile">
+                  👤 Profile
+                </div>
+                <div class="settings-tab" data-settings-tab="language">
+                  🌐 Language
+                </div>
+              </div>
+              <div>
+                <div
+                  class="card settings-panel active"
+                  data-settings-panel="theme"
+                >
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Dark mode</h4>
+                        <p>Switch between light and dark themes.</p>
+                      </div>
+                      <div
+                        class="switch"
+                        onclick="window.PinkUI.toggleTheme()"
+                      ></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Reduced motion</h4>
+                        <p>Minimize animations across the app.</p>
+                      </div>
+                      <div class="switch"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>High contrast</h4>
+                        <p>Increase color contrast for accessibility.</p>
+                      </div>
+                      <div class="switch"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="notif">
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Email notifications</h4>
+                        <p>Receive job alerts and updates by email.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Push notifications</h4>
+                        <p>Get real-time alerts in your browser.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Job recommendations</h4>
+                        <p>Suggested roles based on your profile.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Message alerts</h4>
+                        <p>Notify when recruiters message you.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="privacy">
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Profile visibility</h4>
+                        <p>Allow recruiters to find your profile.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Show online status</h4>
+                        <p>Display when you're active.</p>
+                      </div>
+                      <div class="switch"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Connection requests</h4>
+                        <p>Allow anyone to connect with you.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="profile">
+                  <div class="card-body">
+                    <div class="field">
+                      <label class="field-label">Full Name</label
+                      ><input class="input" value="Alex Johnson" />
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Headline</label
+                      ><input class="input" value="Senior Software Engineer" />
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Email</label
+                      ><input class="input" value="alex@example.com" />
+                    </div>
+                    <button class="btn btn-primary">Save Changes</button>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="language">
+                  <div class="card-body">
+                    <div class="field">
+                      <label class="field-label">Display Language</label
+                      ><select class="select">
+                        <option>English</option>
+                        <option>हिन्दी</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                        <option>Deutsch</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Timezone</label
+                      ><select class="select">
+                        <option>Asia/Kolkata (IST)</option>
+                        <option>America/New_York (EST)</option>
+                        <option>Europe/London (GMT)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script>
+      // Render feed into both dashboard preview and full feed section
+      document.addEventListener("DOMContentLoaded", () => {
+        const fullFeed = document.getElementById("feedStreamFeed");
+        if (fullFeed && window.PinkDash) {
+          // dashboard.js handles #feedStream; duplicate into feed section
+        }
+        // Notifications page list
+        const np = document.getElementById("notifPage");
+        if (np) {
+          const items = [
+            {
+              text: "Nimbus Cloud viewed your application",
+              time: "12m ago",
+              unread: true,
+            },
+            {
+              text: "Aarav Mehta endorsed you for React",
+              time: "1h ago",
+              unread: true,
+            },
+            {
+              text: "Your application moved to Interview stage",
+              time: "3h ago",
+              unread: true,
+            },
+            {
+              text: "Lumen Labs posted a new role: Product Designer",
+              time: "6h ago",
+              unread: false,
+            },
+            {
+              text: "New connection request from Sara Klein",
+              time: "1d ago",
+              unread: false,
+            },
+          ];
+          np.innerHTML = items
+            .map(
+              (n) =>
+                '<div class="dropdown-item' +
+                (n.unread ? " unread" : "") +
+                '" style="border:1px solid var(--border);border-radius:12px"><div class="avatar avatar-sm">🔔</div><div style="flex:1"><div class="di-text">' +
+                n.text +
+                '</div><div class="di-time">' +
+                n.time +
+                "</div></div></div>",
+            )
+            .join("");
+        }
+      });
+    </script>
+  </body>
+</html>

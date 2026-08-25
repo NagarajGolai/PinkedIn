@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Dashboard — PinkedIn</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="dash" id="dash">
+      <div class="sidebar-backdrop"></div>
+
+      <!-- ===== SIDEBAR (Recruiter) ===== -->
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <a href="index.html" class="nav-brand">
+            <span class="logo-mark">P</span>
+            <span>Pink<span style="color: #fff">edIn</span></span>
+          </a>
+          <button
+            class="icon-btn"
+            data-collapse
+            style="color: #94a3b8; margin-left: auto"
+            aria-label="Collapse sidebar"
+            title="Collapse"
+          >
+            ⇆
+          </button>
+        </div>
+        <nav class="sidebar-nav" aria-label="Recruiter dashboard">
+          <div class="side-group-label">Recruiting</div>
+          <div class="side-item active" data-section="dashboard">
+            <span class="side-ico">📊</span
+            ><span class="side-text">Dashboard</span>
+          </div>
+          <div class="side-item" data-section="company-profile">
+            <span class="side-ico">🏢</span
+            ><span class="side-text">Company Profile</span>
+          </div>
+          <div class="side-item" data-section="jobs">
+            <span class="side-ico">💼</span><span class="side-text">Jobs</span
+            ><span class="side-badge">5</span>
+          </div>
+          <div class="side-item" data-section="applicants">
+            <span class="side-ico">👥</span
+            ><span class="side-text">Applicants</span
+            ><span class="side-badge">42</span>
+          </div>
+          <div class="side-group-label">Insights</div>
+          <div class="side-item" data-section="analytics">
+            <span class="side-ico">📈</span
+            ><span class="side-text">Analytics</span>
+          </div>
+          <div class="side-item" data-section="announcements">
+            <span class="side-ico">📢</span
+            ><span class="side-text">Announcements</span>
+          </div>
+          <div class="side-group-label">Account</div>
+          <div class="side-item" data-section="settings">
+            <span class="side-ico">⚙️</span
+            ><span class="side-text">Settings</span>
+          </div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="side-user">
+            <span class="avatar avatar-sm" style="background: #4f46e5">NC</span>
+            <div class="su-info">
+              <div class="su-name">Nimbus Cloud</div>
+              <div class="su-role">Recruiter</div>
+            </div>
+          </div>
+          <button
+            class="side-logout"
+            data-logout
+          >
+            <span class="side-ico">⏻</span><span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN ===== -->
+      <div>
+        <header class="topnav">
+          <button class="topnav-burger" data-burger aria-label="Open menu">
+            ☰
+          </button>
+          <div class="topnav-search">
+            <span class="search-ico">🔍</span>
+            <input
+              class="input"
+              type="search"
+              placeholder="Search applicants, jobs…"
+              aria-label="Search"
+            />
+          </div>
+          <div class="topnav-actions">
+            <span class="topnav-date" data-live-date>—</span>
+            <button
+              class="topnav-theme"
+              data-theme-toggle
+              aria-label="Toggle theme"
+            >
+              🌙
+            </button>
+            <button
+              class="icon-btn"
+              data-dropdown="#coNotifDropdown"
+              aria-label="Notifications"
+            >
+              🔔<span class="dot-badge">5</span>
+            </button>
+            <div class="dropdown" id="coNotifDropdown">
+              <div class="dropdown-head">
+                <h4>Notifications</h4>
+                <span class="head-action">Mark all read</span>
+              </div>
+              <div class="dropdown-body"></div>
+            </div>
+            <span
+              class="avatar avatar-sm"
+              style="cursor: pointer; background: #4f46e5"
+              >NC</span
+            >
+          </div>
+        </header>
+
+        <main class="dash-main">
+          <!-- ===== DASHBOARD ===== -->
+          <section class="dash-section active" data-section="dashboard">
+            <div class="hero-banner reveal">
+              <div>
+                <h2>Good morning, Nimbus Cloud 👋</h2>
+                <p>
+                  You have 42 new applications and 3 interviews scheduled today.
+                </p>
+                <div class="hero-quick-stats">
+                  <div>
+                    <div class="hqs-num">5</div>
+                    <div class="hqs-label">Open positions</div>
+                  </div>
+                  <div>
+                    <div class="hqs-num">42</div>
+                    <div class="hqs-label">New applicants</div>
+                  </div>
+                  <div>
+                    <div class="hqs-num">3</div>
+                    <div class="hqs-label">Interviews today</div>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-light" data-create-job>
+                  ➕ Post a Job
+                </button>
+                <button
+                  class="btn btn-light"
+                  onclick="
+                    document.querySelector('[data-section=applicants]').click()
+                  "
+                >
+                  👥 Review Applicants
+                </button>
+                <button
+                  class="btn btn-light"
+                  onclick="
+                    document.querySelector('[data-section=analytics]').click()
+                  "
+                >
+                  📈 View Analytics
+                </button>
+              </div>
+              <span class="hero-illus-mini">💼</span>
+            </div>
+
+            <!-- KPI cards -->
+            <div class="kpi-grid">
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">💼</div></div>
+                <div class="kpi-num" data-count="12">0</div>
+                <div class="kpi-label">Jobs Posted</div>
+                <div class="kpi-trend up">↑ 2 this week</div>
+                <span class="kpi-bg-ico">💼</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">🟢</div></div>
+                <div class="kpi-num" data-count="5">0</div>
+                <div class="kpi-label">Open Positions</div>
+                <div class="kpi-trend up">↑ 1 new</div>
+                <span class="kpi-bg-ico">🟢</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">📋</div></div>
+                <div class="kpi-num" data-count="184">0</div>
+                <div class="kpi-label">Total Applications</div>
+                <div class="kpi-trend up">↑ 42 new</div>
+                <span class="kpi-bg-ico">📋</span>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">🎯</div></div>
+                <div class="kpi-num" data-count="68">0</div>
+                <div class="kpi-label">Hiring Rate %</div>
+                <div class="kpi-trend down">↓ 3% vs last qtr</div>
+                <span class="kpi-bg-ico">🎯</span>
+              </div>
+            </div>
+
+            <div class="dash-body">
+              <div class="main-col">
+                <div class="card chart-card">
+                  <div class="card-head">
+                    <h3>Applications — Last 8 Months</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart-area" data-chart-bars>
+                      <div class="chart-bar" data-h="40%">
+                        <span class="bar-val">40</span
+                        ><span class="bar-label">Dec</span>
+                      </div>
+                      <div class="chart-bar" data-h="55%">
+                        <span class="bar-val">55</span
+                        ><span class="bar-label">Jan</span>
+                      </div>
+                      <div class="chart-bar" data-h="48%">
+                        <span class="bar-val">48</span
+                        ><span class="bar-label">Feb</span>
+                      </div>
+                      <div class="chart-bar" data-h="72%">
+                        <span class="bar-val">72</span
+                        ><span class="bar-label">Mar</span>
+                      </div>
+                      <div class="chart-bar" data-h="65%">
+                        <span class="bar-val">65</span
+                        ><span class="bar-label">Apr</span>
+                      </div>
+                      <div class="chart-bar" data-h="88%">
+                        <span class="bar-val">88</span
+                        ><span class="bar-label">May</span>
+                      </div>
+                      <div class="chart-bar" data-h="78%">
+                        <span class="bar-val">78</span
+                        ><span class="bar-label">Jun</span>
+                      </div>
+                      <div class="chart-bar" data-h="96%">
+                        <span class="bar-val">96</span
+                        ><span class="bar-label">Jul</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="side-col">
+                <div class="card">
+                  <div class="card-head"><h3>Recent Activity</h3></div>
+                  <div class="card-body" id="activityFeed"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== COMPANY PROFILE ===== -->
+          <section class="dash-section" data-section="company-profile">
+            <div class="page-head">
+              <div>
+                <h1>Company Profile</h1>
+                <p>Your employer brand on PinkedIn.</p>
+              </div>
+              <button class="btn btn-secondary" data-edit-company>
+                ✏️ Edit Profile
+              </button>
+            </div>
+            <div class="card" style="overflow: hidden">
+              <div
+                class="profile-cover"
+                style="
+                  background: linear-gradient(
+                    120deg,
+                    #4f46e5,
+                    #2563eb,
+                    #0a66c2
+                  );
+                "
+              >
+                <button class="cover-edit">📷 Edit Banner</button>
+              </div>
+              <div class="profile-main">
+                <div class="profile-head">
+                  <div class="avatar avatar-xl" style="background: #4f46e5">
+                    NC
+                  </div>
+                  <div class="ph-info">
+                    <h2>Nimbus Cloud</h2>
+                    <p>
+                      Cloud Services · San Francisco, CA · 201–1000 employees
+                    </p>
+                  </div>
+                </div>
+                <p class="profile-bio">
+                  Nimbus Cloud is the enterprise platform for real-time
+                  collaboration. We help teams ship faster with secure, scalable
+                  cloud infrastructure trusted by Fortune 500 companies.
+                </p>
+                <div class="profile-stats">
+                  <div>
+                    <div class="ps-num">128k</div>
+                    <div class="ps-label">Followers</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">14</div>
+                    <div class="ps-label">Open roles</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">4.6</div>
+                    <div class="ps-label">Rating</div>
+                  </div>
+                  <div>
+                    <div class="ps-num">2.1k</div>
+                    <div class="ps-label">Employees</div>
+                  </div>
+                </div>
+                <div class="dash-body">
+                  <div class="main-col">
+                    <div class="card">
+                      <div class="card-head"><h3>About</h3></div>
+                      <div class="card-body">
+                        <p style="margin-bottom: 12px">
+                          Founded in 2016, Nimbus Cloud powers collaboration for
+                          over 12,000 organizations. Our mission is to make
+                          every team's best work visible, secure, and fast.
+                        </p>
+                        <div
+                          style="
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 12px;
+                            font-size: 0.88rem;
+                          "
+                        >
+                          <span
+                            ><strong>Website:</strong>
+                            <a href="#" class="forgot-link"
+                              >nimbus.cloud</a
+                            ></span
+                          ><span><strong>Industry:</strong> Cloud Services</span
+                          ><span><strong>Size:</strong> 201–1000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="side-col">
+                    <div class="card">
+                      <div class="card-head"><h3>Quick Stats</h3></div>
+                      <div class="card-body">
+                        <div class="hbar-list">
+                          <div
+                            class="div"
+                            style="font-size: 0.85rem; margin-bottom: 8px"
+                          >
+                            Hiring funnel
+                          </div>
+                          <div class="hbar-item">
+                            <div class="hbar-top">
+                              <span>Applied</span><span>184</span>
+                            </div>
+                            <div class="hbar-track">
+                              <div class="hbar-fill" data-w="100%"></div>
+                            </div>
+                          </div>
+                          <div class="hbar-item">
+                            <div class="hbar-top">
+                              <span>Shortlisted</span><span>68</span>
+                            </div>
+                            <div class="hbar-track">
+                              <div class="hbar-fill" data-w="37%"></div>
+                            </div>
+                          </div>
+                          <div class="hbar-item">
+                            <div class="hbar-top">
+                              <span>Interviewed</span><span>34</span>
+                            </div>
+                            <div class="hbar-track">
+                              <div class="hbar-fill" data-w="18%"></div>
+                            </div>
+                          </div>
+                          <div class="hbar-item">
+                            <div class="hbar-top">
+                              <span>Offered</span><span>12</span>
+                            </div>
+                            <div class="hbar-track">
+                              <div class="hbar-fill" data-w="7%"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== JOBS ===== -->
+          <section class="dash-section" data-section="jobs">
+            <div class="page-head">
+              <div>
+                <h1>Job Management</h1>
+                <p>Create, edit, and track your job postings.</p>
+              </div>
+              <button class="btn btn-primary" data-create-job>
+                ➕ Create Job
+              </button>
+            </div>
+            <div
+              class="card"
+              style="margin-bottom: var(--space-6); padding: var(--space-5)"
+            >
+              <div class="filters">
+                <input
+                  class="input"
+                  id="jobSearchCo"
+                  placeholder="Search jobs…"
+                  style="max-width: 280px"
+                />
+                <select class="select" id="jobStatusFilter" style="width: auto">
+                  <option value="">All statuses</option>
+                  <option>Open</option>
+                  <option>Paused</option>
+                  <option>Closed</option>
+                </select>
+                <button class="chip active">All departments</button>
+                <button class="chip">Engineering</button>
+                <button class="chip">Design</button>
+                <button class="chip">Marketing</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Job Title</th>
+                      <th>Department</th>
+                      <th>Applicants</th>
+                      <th>Status</th>
+                      <th>Posted</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="companyJobsBody"></tbody>
+                </table>
+              </div>
+              <div class="pagination">
+                <button class="page-btn" disabled>←</button>
+                <button class="page-btn active">1</button
+                ><button class="page-btn">2</button
+                ><button class="page-btn">3</button>
+                <button class="page-btn">→</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== APPLICANTS ===== -->
+          <section class="dash-section" data-section="applicants">
+            <div class="page-head">
+              <div>
+                <h1>Applicants</h1>
+                <p>Review and manage candidates across your pipeline.</p>
+              </div>
+            </div>
+            <div
+              class="card"
+              style="margin-bottom: var(--space-6); padding: var(--space-5)"
+            >
+              <div class="filters">
+                <input
+                  class="input"
+                  placeholder="Search applicants…"
+                  style="max-width: 280px"
+                />
+                <button class="chip active">All</button>
+                <button class="chip">Shortlisted</button>
+                <button class="chip">Interview</button>
+                <button class="chip">Offer</button>
+                <button class="chip">Rejected</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Candidate</th>
+                      <th>Role</th>
+                      <th>Experience</th>
+                      <th>Match Score</th>
+                      <th>Status</th>
+                      <th>Progress</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="applicantsBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== ANALYTICS ===== -->
+          <section class="dash-section" data-section="analytics">
+            <div class="page-head">
+              <div>
+                <h1>Analytics</h1>
+                <p>Hiring insights and team performance.</p>
+              </div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom: var(--space-6)">
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">⏱️</div></div>
+                <div class="kpi-num">
+                  18<span style="font-size: 1rem">d</span>
+                </div>
+                <div class="kpi-label">Avg time-to-hire</div>
+                <div class="kpi-trend up">↓ 4d faster</div>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">📈</div></div>
+                <div class="kpi-num">68%</div>
+                <div class="kpi-label">Offer acceptance</div>
+                <div class="kpi-trend up">↑ 6%</div>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">💰</div></div>
+                <div class="kpi-num">$4.2k</div>
+                <div class="kpi-label">Cost per hire</div>
+                <div class="kpi-trend down">↓ $800</div>
+              </div>
+              <div class="kpi-card card">
+                <div class="kpi-top"><div class="kpi-icon">🎯</div></div>
+                <div class="kpi-num">42%</div>
+                <div class="kpi-label">Interview pass rate</div>
+                <div class="kpi-trend up">↑ 5%</div>
+              </div>
+            </div>
+            <div class="dash-body">
+              <div class="main-col">
+                <div class="card chart-card">
+                  <div class="card-head"><h3>Monthly Applications</h3></div>
+                  <div class="card-body">
+                    <div class="chart-area" data-chart-bars>
+                      <div class="chart-bar" data-h="30%">
+                        <span class="bar-val">30</span
+                        ><span class="bar-label">Jan</span>
+                      </div>
+                      <div class="chart-bar" data-h="50%">
+                        <span class="bar-val">50</span
+                        ><span class="bar-label">Feb</span>
+                      </div>
+                      <div class="chart-bar" data-h="42%">
+                        <span class="bar-val">42</span
+                        ><span class="bar-label">Mar</span>
+                      </div>
+                      <div class="chart-bar" data-h="68%">
+                        <span class="bar-val">68</span
+                        ><span class="bar-label">Apr</span>
+                      </div>
+                      <div class="chart-bar" data-h="58%">
+                        <span class="bar-val">58</span
+                        ><span class="bar-label">May</span>
+                      </div>
+                      <div class="chart-bar" data-h="82%">
+                        <span class="bar-val">82</span
+                        ><span class="bar-label">Jun</span>
+                      </div>
+                      <div class="chart-bar" data-h="74%">
+                        <span class="bar-val">74</span
+                        ><span class="bar-label">Jul</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-head"><h3>Hiring Funnel</h3></div>
+                  <div class="card-body">
+                    <div class="hbar-list">
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Applications received</span><span>184</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="100%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Screened</span><span>112</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="61%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Shortlisted</span><span>68</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="37%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Interviewed</span><span>34</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="18%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Offered</span><span>12</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="7%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Hired</span><span>8</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="4%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="side-col">
+                <div class="card">
+                  <div class="card-head"><h3>Hiring Goals</h3></div>
+                  <div class="card-body">
+                    <div class="circle-stats">
+                      <div class="circle-stat">
+                        <div class="circle-prog" data-pct="80">
+                          <span class="cp-val">80%</span>
+                        </div>
+                        <div class="cp-label">Q3 target</div>
+                      </div>
+                    </div>
+                    <div style="margin-top: var(--space-6)">
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Engineering hires</span><span>6/8</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="75%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item" style="margin-top: 12px">
+                        <div class="hbar-top">
+                          <span>Design hires</span><span>2/3</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="66%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-head"><h3>Top Sources</h3></div>
+                  <div class="card-body">
+                    <div class="hbar-list">
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>PinkedIn feed</span><span>62%</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="62%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Referrals</span><span>24%</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="24%"></div>
+                        </div>
+                      </div>
+                      <div class="hbar-item">
+                        <div class="hbar-top">
+                          <span>Direct apply</span><span>14%</span>
+                        </div>
+                        <div class="hbar-track">
+                          <div class="hbar-fill" data-w="14%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== ANNOUNCEMENTS ===== -->
+          <section class="dash-section" data-section="announcements">
+            <div class="page-head">
+              <div>
+                <h1>Announcements</h1>
+                <p>Share company news and build your employer brand.</p>
+              </div>
+            </div>
+            <div class="dash-body">
+              <div class="main-col">
+                <div class="card" style="margin-bottom: var(--space-6)">
+                  <form id="createAnnouncementForm">
+                    <div class="create-post">
+                      <span class="avatar avatar-md" style="background: #4f46e5"
+                        >NC</span
+                      >
+                      <input
+                        class="input"
+                        id="announcementInput"
+                        placeholder="Share an update with your followers…"
+                        required
+                      />
+                    </div>
+                    <div
+                      class="post-actions-row"
+                      style="padding: 0 var(--space-6) var(--space-5)"
+                    >
+                      <button type="button" class="post-action">🖼️ Photo</button
+                      ><button type="button" class="post-action">🔗 Link</button
+                      ><button
+                        type="submit"
+                        class="btn btn-primary btn-sm"
+                        style="margin-left: auto"
+                      >
+                        Publish
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div id="announcementsFeed"></div>
+              </div>
+              <div class="side-col">
+                <div class="card">
+                  <div class="card-head"><h3>Reach</h3></div>
+                  <div class="card-body">
+                    <div style="text-align: center">
+                      <div style="font-size: 2.4rem; font-weight: 800">
+                        128k
+                      </div>
+                      <div class="muted" style="font-size: 0.85rem">
+                        Followers
+                      </div>
+                    </div>
+                    <hr class="divider" />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 0.85rem;
+                      "
+                    >
+                      <span>This week's impressions</span><strong>42.1k</strong>
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 0.85rem;
+                        margin-top: 8px;
+                      "
+                    >
+                      <span>Engagement rate</span
+                      ><strong style="color: var(--success)">8.4%</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== SETTINGS ===== -->
+          <section class="dash-section" data-section="settings">
+            <div class="page-head">
+              <div>
+                <h1>Settings</h1>
+                <p>Manage your company workspace.</p>
+              </div>
+            </div>
+            <div class="settings-layout">
+              <div class="settings-tabs">
+                <div class="settings-tab active" data-settings-tab="theme">
+                  🎨 Theme
+                </div>
+                <div class="settings-tab" data-settings-tab="notif">
+                  🔔 Notifications
+                </div>
+                <div class="settings-tab" data-settings-tab="privacy">
+                  🔒 Privacy
+                </div>
+                <div class="settings-tab" data-settings-tab="language">
+                  🌐 Language
+                </div>
+              </div>
+              <div>
+                <div
+                  class="card settings-panel active"
+                  data-settings-panel="theme"
+                >
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Dark mode</h4>
+                        <p>Switch between light and dark themes.</p>
+                      </div>
+                      <div
+                        class="switch"
+                        onclick="window.PinkUI.toggleTheme()"
+                      ></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Reduced motion</h4>
+                        <p>Minimize animations.</p>
+                      </div>
+                      <div class="switch"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="notif">
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>New applicant alerts</h4>
+                        <p>Notify when someone applies.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Daily digest</h4>
+                        <p>Summary of hiring activity.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Weekly report</h4>
+                        <p>Hiring analytics summary.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="privacy">
+                  <div class="card-body">
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Public company page</h4>
+                        <p>Make your profile visible to seekers.</p>
+                      </div>
+                      <div class="switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                      <div class="sr-info">
+                        <h4>Show applicant names</h4>
+                        <p>Display names in public pipelines.</p>
+                      </div>
+                      <div class="switch"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-panel" data-settings-panel="language">
+                  <div class="card-body">
+                    <div class="field">
+                      <label class="field-label">Display Language</label
+                      ><select class="select">
+                        <option>English</option>
+                        <option>हिन्दी</option>
+                        <option>Español</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Timezone</label
+                      ><select class="select">
+                        <option>America/Los_Angeles (PST)</option>
+                        <option>Asia/Kolkata (IST)</option>
+                        <option>Europe/London (GMT)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Company notifications dropdown content
+        const dd = document.querySelector("#coNotifDropdown .dropdown-body");
+        if (dd) {
+          const items = [
+            {
+              text: "New applicant: Priya Nair for Senior Frontend Engineer",
+              time: "8m ago",
+              unread: true,
+            },
+            {
+              text: "Interview scheduled with Marcus Lee",
+              time: "1h ago",
+              unread: true,
+            },
+            {
+              text: "Elena Costa accepted your offer",
+              time: "3h ago",
+              unread: true,
+            },
+            {
+              text: "Tomás Rivera declined the interview",
+              time: "5h ago",
+              unread: false,
+            },
+            {
+              text: "Weekly hiring report is ready",
+              time: "1d ago",
+              unread: false,
+            },
+          ];
+          dd.innerHTML = items
+            .map(
+              (n) =>
+                '<div class="dropdown-item' +
+                (n.unread ? " unread" : "") +
+                '"><div class="avatar avatar-sm">🔔</div><div><div class="di-text">' +
+                n.text +
+                '</div><div class="di-time">' +
+                n.time +
+                "</div></div></div>",
+            )
+            .join("");
+        }
+      });
+    </script>
+  </body>
+</html>

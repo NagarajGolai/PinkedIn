@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PinkedIn</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>PinkedIn</h1>
+        <p>Professional network for hiring, jobs, and candidates.</p>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-button active" data-panel="dashboard">Dashboard</button>
+        <button class="nav-button" data-panel="profile">Profile</button>
+        <button class="nav-button" data-panel="posts">Posts</button>
+        <button class="nav-button" data-panel="jobs">Jobs</button>
+        <button class="nav-button" data-panel="companies">Companies</button>
+        <button class="nav-button" data-panel="applications">Applications</button>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h2 id="panel-title">Dashboard</h2>
+          <p>Use the API gateway on port 8080 to access the backend services.</p>
+        </div>
+        <div class="status-pill" id="api-status">Gateway: Checking...</div>
+      </header>
+
+      <section class="panel" id="dashboard">
+        <div class="grid cards">
+          <article class="card">
+            <h3>Profile</h3>
+            <p>Register or update your user details.</p>
+          </article>
+          <article class="card">
+            <h3>Posts</h3>
+            <p>Create and browse posts for your network.</p>
+          </article>
+          <article class="card">
+            <h3>Jobs</h3>
+            <p>Manage job postings and applications.</p>
+          </article>
+          <article class="card">
+            <h3>Companies</h3>
+            <p>Register and search company profiles.</p>
+          </article>
+          <article class="card">
+            <h3>Applications</h3>
+            <p>Apply for jobs and view candidate status.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="profile">
+        <div class="section-header">
+          <h3>User Profile</h3>
+          <p>Register, fetch, update, and delete your profile.</p>
+        </div>
+        <div class="form-grid">
+          <form id="register-form" class="card form-card">
+            <h4>Register New User</h4>
+            <label>Name<input type="text" name="name" required /></label>
+            <label>Email<input type="email" name="email" required /></label>
+            <label>Password<input type="password" name="password" required minlength="6" /></label>
+            <label>Phone<input type="text" name="phone" /></label>
+            <label>Headline<input type="text" name="headline" /></label>
+            <label>Location<input type="text" name="location" /></label>
+            <label>Skills<input type="text" name="skills" /></label>
+            <button type="submit">Register</button>
+          </form>
+
+          <form id="profile-form" class="card form-card">
+            <h4>Manage Existing Profile</h4>
+            <label>User ID<input type="number" name="userId" required /></label>
+            <label>Name<input type="text" name="name" /></label>
+            <label>Phone<input type="text" name="phone" /></label>
+            <label>Headline<input type="text" name="headline" /></label>
+            <label>Location<input type="text" name="location" /></label>
+            <label>Skills<input type="text" name="skills" /></label>
+            <div class="form-actions">
+              <button type="button" id="fetch-profile">Fetch</button>
+              <button type="button" id="update-profile">Update</button>
+              <button type="button" id="delete-profile">Delete</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="posts">
+        <div class="section-header">
+          <h3>Posts</h3>
+          <p>Create a post or browse the feed.</p>
+        </div>
+        <div class="form-grid">
+          <form id="post-form" class="card form-card">
+            <h4>Create Post</h4>
+            <label>User ID<input type="number" name="userId" required /></label>
+            <label>Content<textarea name="content" rows="4" required></textarea></label>
+            <label>Post Type<select name="postType" required>
+              <option value="TEXT">Text</option>
+              <option value="IMAGE">Image</option>
+              <option value="VIDEO">Video</option>
+            </select></label>
+            <label>Media URL<input type="url" name="mediaUrl" /></label>
+            <button type="submit">Publish Post</button>
+          </form>
+
+          <div class="card panel-card">
+            <h4>Feed</h4>
+            <button type="button" id="load-feed">Load Feed</button>
+            <div id="feed-list" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="jobs">
+        <div class="section-header">
+          <h3>Jobs</h3>
+          <p>Post new jobs or browse openings.</p>
+        </div>
+        <div class="form-grid">
+          <form id="job-form" class="card form-card">
+            <h4>Create Job</h4>
+            <label>Title<input type="text" name="title" required /></label>
+            <label>Description<textarea name="description" rows="3"></textarea></label>
+            <label>Salary<input type="text" name="salary" /></label>
+            <label>Experience<input type="text" name="experience" /></label>
+            <label>Employment Type<input type="text" name="employmentType" /></label>
+            <label>Skills<input type="text" name="skills" /></label>
+            <label>Location<input type="text" name="location" /></label>
+            <label>Deadline<input type="date" name="deadline" /></label>
+            <label>Openings<input type="number" name="openings" required min="1" /></label>
+            <label>Company ID<input type="number" name="companyId" required /></label>
+            <button type="submit">Create Job</button>
+          </form>
+
+          <div class="card panel-card">
+            <h4>Jobs</h4>
+            <button type="button" id="load-jobs">Load Jobs</button>
+            <div id="job-list" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="companies">
+        <div class="section-header">
+          <h3>Companies</h3>
+          <p>Create and search company profiles.</p>
+        </div>
+        <div class="form-grid">
+          <form id="company-form" class="card form-card">
+            <h4>Create Company</h4>
+            <label>Name<input type="text" name="name" required /></label>
+            <label>Description<textarea name="description" rows="3"></textarea></label>
+            <label>Industry<input type="text" name="industry" /></label>
+            <label>Website<input type="url" name="website" /></label>
+            <label>Company Size<input type="text" name="companySize" /></label>
+            <label>Location<input type="text" name="location" /></label>
+            <label>Owner ID<input type="number" name="ownerId" required /></label>
+            <button type="submit">Create Company</button>
+          </form>
+
+          <div class="card panel-card">
+            <h4>Search Companies</h4>
+            <div class="search-row">
+              <input type="text" id="company-search" placeholder="Search companies" />
+              <button type="button" id="search-companies">Search</button>
+            </div>
+            <div id="company-list" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="applications">
+        <div class="section-header">
+          <h3>Applications</h3>
+          <p>Apply to jobs and manage application status.</p>
+        </div>
+        <div class="form-grid">
+          <form id="application-form" class="card form-card">
+            <h4>Apply to Job</h4>
+            <label>User ID<input type="number" name="userId" required /></label>
+            <label>Job ID<input type="number" name="jobId" required /></label>
+            <label>Resume URL<input type="url" name="resumeUrl" /></label>
+            <label>Cover Letter<textarea name="coverLetter" rows="3"></textarea></label>
+            <button type="submit">Apply</button>
+          </form>
+
+          <div class="card panel-card">
+            <h4>My Applications</h4>
+            <div class="search-row">
+              <input type="number" id="application-user-id" placeholder="User ID" />
+              <button type="button" id="load-applications">Load Mine</button>
+            </div>
+            <div id="application-list" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="response-panel">
+        <div class="section-header">
+          <h3>API Response</h3>
+        </div>
+        <div class="card response-card">
+          <pre id="api-response">No requests made yet.</pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

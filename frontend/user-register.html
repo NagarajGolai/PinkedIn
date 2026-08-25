@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration — PinkedIn</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="auth-page">
+      <aside class="auth-aside">
+        <a href="index.html" class="nav-brand"
+          ><span class="logo-mark">P</span
+          ><span>Pink<span style="color: #fff">edIn</span></span></a
+        >
+        <div class="auth-aside-content">
+          <h2>Build your professional brand</h2>
+          <p>
+            Create your job-seeker profile and unlock thousands of
+            opportunities, a personalized feed, and a powerful application
+            tracker.
+          </p>
+          <ul class="auth-aside-list">
+            <li><span class="check">✓</span> Stand out with a rich profile</li>
+            <li>
+              <span class="check">✓</span> Track every application in one place
+            </li>
+            <li>
+              <span class="check">✓</span> Connect with recruiters directly
+            </li>
+          </ul>
+        </div>
+        <div class="auth-aside-foot">
+          © 2026 PinkedIn · Connect. Hire. Grow.
+        </div>
+      </aside>
+
+      <main class="auth-main">
+        <div class="auth-main-inner">
+          <a href="register.html" class="auth-back">← Back to selection</a>
+          <h1 class="auth-title">Create your profile</h1>
+          <p class="auth-sub muted">Join 2.4M+ professionals on PinkedIn.</p>
+
+          <form id="userRegisterForm" novalidate>
+            <div class="form-section-title">Account</div>
+            <div class="field" data-required data-type="text">
+              <label class="field-label" for="userFullName"
+                >Full Name <span class="req">*</span></label
+              >
+              <input
+                class="input"
+                id="userFullName"
+                name="fullName"
+                placeholder="e.g. Alex Johnson"
+                required
+              />
+              <div class="field-error">This field is required.</div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field" data-required data-type="email">
+                <label class="field-label" for="userEmail"
+                  >Email <span class="req">*</span></label
+                >
+                <input
+                  class="input"
+                  id="userEmail"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                />
+                <div class="field-error">Enter a valid email.</div>
+              </div>
+              <div class="field" data-required data-type="phone">
+                <label class="field-label" for="userPhone"
+                  >Phone <span class="req">*</span></label
+                >
+                <input
+                  class="input"
+                  id="userPhone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+1 555 000 1234"
+                  required
+                />
+                <div class="field-error">Enter a valid phone number.</div>
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field" data-required data-type="password">
+                <label class="field-label" for="userPassword"
+                  >Password <span class="req">*</span></label
+                >
+                <input
+                  class="input"
+                  id="userPassword"
+                  name="password"
+                  type="password"
+                  placeholder="At least 8 characters"
+                  required
+                />
+                <div class="field-error">
+                  Password must be at least 8 characters.
+                </div>
+              </div>
+              <div
+                class="field"
+                data-required
+                data-type="confirm"
+                data-match="#userPassword"
+              >
+                <label class="field-label" for="userConfirm"
+                  >Confirm Password <span class="req">*</span></label
+                >
+                <input
+                  class="input"
+                  id="userConfirm"
+                  name="confirm"
+                  type="password"
+                  placeholder="Re-enter password"
+                  required
+                />
+                <div class="field-error">Passwords do not match.</div>
+              </div>
+            </div>
+
+            <div class="form-section-title">Professional</div>
+            <div class="field" data-required data-type="text">
+              <label class="field-label" for="userHeadline"
+                >Headline <span class="req">*</span></label
+              >
+              <input
+                class="input"
+                id="userHeadline"
+                name="headline"
+                placeholder="e.g. Senior Software Engineer"
+                required
+              />
+              <div class="field-hint">
+                A short professional tagline shown on your profile.
+              </div>
+              <div class="field-error">This field is required.</div>
+            </div>
+            <div class="field" data-required data-type="text">
+              <label class="field-label" for="userSkills"
+                >Skills <span class="req">*</span></label
+              >
+              <input
+                class="input"
+                id="userSkills"
+                name="skills"
+                placeholder="e.g. React, Java, Figma (comma separated)"
+                required
+              />
+              <div class="field-hint">Separate skills with commas.</div>
+              <div class="field-error">This field is required.</div>
+            </div>
+            <div class="field" data-required data-type="text">
+              <label class="field-label" for="userLocation"
+                >Location <span class="req">*</span></label
+              >
+              <input
+                class="input"
+                id="userLocation"
+                name="location"
+                placeholder="e.g. Bengaluru, India"
+                required
+              />
+              <div class="field-error">This field is required.</div>
+            </div>
+
+            <label
+              class="checkbox"
+              style="margin: var(--space-4) 0 var(--space-6)"
+            >
+              <input type="checkbox" required /> I agree to the
+              <a href="#" class="forgot-link">Terms</a> &amp;
+              <a href="#" class="forgot-link">Privacy Policy</a>
+            </label>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Create Account
+            </button>
+          </form>
+
+          <div class="auth-divider">or sign up with</div>
+          <div class="social-auth">
+            <button class="btn btn-secondary" type="button">🌐 Google</button>
+            <button class="btn btn-secondary" type="button">💼 LinkedIn</button>
+          </div>
+
+          <p class="auth-foot">
+            Already have an account? <a href="login.html">Sign in</a>
+          </p>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>
