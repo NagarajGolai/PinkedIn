@@ -64,7 +64,7 @@ pipeline {
                     for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8095 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
                     for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8000 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
 
-                    timeout /t 5 /nobreak
+                    ping 127.0.0.1 -n 6 >nul
                 '''
 
                 // Start services
